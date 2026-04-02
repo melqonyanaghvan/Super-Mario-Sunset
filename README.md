@@ -26,7 +26,10 @@ As a **C# developer**, I focused on creating clean, modular code and leveraging 
 
 ##  Gallery
 
- ![Screenshot 1](https://github.com/melqonyanaghvan/Super-Mario-Sunset/blob/main/screen3.png)  ![Screenshot 2](https://github.com/melqonyanaghvan/Super-Mario-Sunset/blob/main/screen1.png)
+<p align="center">
+  <img src="screen1.png" width="45%" />
+  <img src="screen2.png" width="45%" />
+</p>
 
 ##  Controls
 - **WASD / Arrows:** Move
