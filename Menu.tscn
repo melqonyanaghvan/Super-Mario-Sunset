@@ -1,0 +1,353 @@
+[gd_scene format=3 uid="uid://rpyjbfhanfl1"]
+
+[ext_resource type="Texture2D" uid="uid://c6a6if18oueuf" path="res://Assets/Textures/tex_floor.png" id="1_5qkn8"]
+[ext_resource type="Script" uid="uid://bvl7q7efaut87" path="res://Scripts/Menu.cs" id="1_xucoo"]
+[ext_resource type="PackedScene" uid="uid://mg2euoaqonc" path="res://Scenes/hills.tscn" id="2_xucoo"]
+[ext_resource type="PackedScene" uid="uid://dbx0ajyhem6xh" path="res://Scenes/bush.tscn" id="3_ktlje"]
+[ext_resource type="FontFile" uid="uid://brg3sbxpuu6i6" path="res://PressStart2P-Regular.ttf" id="5_v0s1l"]
+[ext_resource type="PackedScene" uid="uid://c3rbnadjb6den" path="res://Scenes/Castle.tscn" id="6_n4eug"]
+[ext_resource type="PackedScene" uid="uid://djedefuq32kqv" path="res://Scenes/pipe.tscn" id="7_dlksc"]
+[ext_resource type="PackedScene" uid="uid://0x8h4llk516y" path="res://Scenes/Block.tscn" id="8_5p1lm"]
+[ext_resource type="PackedScene" uid="uid://c2p0dsgikaifp" path="res://Scenes/Questionblock.tscn" id="9_1igrg"]
+[ext_resource type="PackedScene" uid="uid://vsvq0326monh" path="res://Scenes/cloud.tscn" id="9_lwhxt"]
+[ext_resource type="Texture2D" uid="uid://c5f1aae5q7bmx" path="res://Assets/Textures/tex_banner.png" id="10_1igrg"]
+[ext_resource type="AudioStream" uid="uid://20abs3aqpdji" path="res://Assets/Sounds/s_menu_option.mp3" id="12_5qkn8"]
+[ext_resource type="AudioStream" uid="uid://fpeb06omanx7" path="res://Assets/Sounds/s_menu_theme.mp3" id="13_xucoo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i28r4"]
+albedo_texture = ExtResource("1_5qkn8")
+metallic = 0.02
+metallic_specular = 0.14
+roughness = 0.79
+uv1_scale = Vector3(200, 500, 50)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ofows"]
+sky_top_color = Color(0.30797032, 0.34067494, 0.5474978, 1)
+sky_horizon_color = Color(0.84809643, 0.6512879, 0.25564992, 1)
+sky_curve = 0.032645788
+ground_horizon_color = Color(0.9098039, 0.6039216, 0.42745098, 1)
+ground_curve = 0.380549
+sun_angle_max = 6.37
+
+[sub_resource type="Sky" id="Sky_43o5b"]
+sky_material = SubResource("ProceduralSkyMaterial_ofows")
+
+[sub_resource type="Environment" id="Environment_tdulj"]
+background_mode = 2
+sky = SubResource("Sky_43o5b")
+ambient_light_source = 3
+ambient_light_color = Color(0.5803922, 0.7254902, 0.7921569, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.05
+ssao_intensity = 7.06
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.62
+glow_bloom = 0.35
+glow_blend_mode = 0
+fog_light_energy = 0.54
+fog_sun_scatter = 0.03
+fog_density = 0.005
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.092
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0176
+volumetric_fog_albedo = Color(0.40392157, 0.46666667, 0.58431375, 1)
+volumetric_fog_anisotropy = 0.33
+volumetric_fog_length = 59.51
+volumetric_fog_ambient_inject = 1.04
+volumetric_fog_sky_affect = 0.154
+adjustment_enabled = true
+adjustment_contrast = 1.015
+adjustment_saturation = 1.2
+
+[sub_resource type="Theme" id="Theme_5qkn8"]
+default_font = ExtResource("5_v0s1l")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v0s1l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5qkn8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktlje"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xucoo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mnkgh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_elwp8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h06ok"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n8j1b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2qy1q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lwhxt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0duj0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75jwl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xucoo"]
+font_size = 21
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v0s1l"]
+font = ExtResource("5_v0s1l")
+font_color = Color(0.960576, 0, 0.0725747, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v0s1l"]
+albedo_texture = ExtResource("10_1igrg")
+
+[node name="Menu" type="Node3D" unique_id=1306029148]
+script = ExtResource("1_xucoo")
+
+[node name="floor5" type="CSGBox3D" parent="." unique_id=1119356343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.16675568, -24.769014, 19.128223)
+use_collision = true
+size = Vector3(400, 50, 174.69104)
+material = SubResource("StandardMaterial3D_i28r4")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=767491844]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6325989, 3.9466996, 82.47838)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1016124272]
+environment = SubResource("Environment_tdulj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=835980025]
+transform = Transform3D(0.09450391, 0.16945899, 0.9809958, -0.9809958, 0.18358836, 0.06279052, -0.169459, -0.96828663, 0.18358837, 151.92397, 35.59329, 49.471252)
+light_color = Color(1, 1, 0.78039217, 1)
+light_energy = 2.68
+light_volumetric_fog_energy = 0.261
+light_specular = 0.596
+light_bake_mode = 1
+shadow_enabled = true
+shadow_bias = 0.0
+
+[node name="Hills" parent="." unique_id=1301228684 instance=ExtResource("2_xucoo")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.180791, 0, 60.026615)
+
+[node name="Hills2" parent="." unique_id=1073300870 instance=ExtResource("2_xucoo")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -10.028886, 0, 62.34808)
+
+[node name="Hills3" parent="." unique_id=1251795279 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 7.7175293, 0.16923642, 73.698906)
+
+[node name="Hills4" parent="." unique_id=1454546679 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -5.531603, 0.31400847, 77.307365)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=648987566]
+
+[node name="MainUi" type="Control" parent="CanvasLayer" unique_id=1231683522]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_5qkn8")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MainUi" unique_id=717380586]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -1.5145833
+anchor_top = -1.0953704
+anchor_right = 2.5604167
+anchor_bottom = 2.1046295
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainUi/CenterContainer" unique_id=664348389]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="EndlessButton" type="Button" parent="CanvasLayer/MainUi/CenterContainer/VBoxContainer" unique_id=1623239222]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_hover_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v0s1l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5qkn8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ktlje")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xucoo")
+text = "THE LONG WALK
+"
+
+[node name="LevelButton" type="Button" parent="CanvasLayer/MainUi/CenterContainer/VBoxContainer" unique_id=2037299935]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_hover_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mnkgh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_elwp8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h06ok")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_n8j1b")
+text = "LEVEL MODE"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/MainUi/CenterContainer/VBoxContainer" unique_id=441888734]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_hover_color = Color(0.83137256, 0.4392157, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2qy1q")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lwhxt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0duj0")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_75jwl")
+text = "EXIT"
+
+[node name="Label" type="Label" parent="CanvasLayer/MainUi" unique_id=890062800]
+layout_mode = 0
+offset_left = 429.0
+offset_top = 498.0
+offset_right = 1140.0
+offset_bottom = 543.0
+text = "github/melqonyanaghvan
+instagram/aghvan_melqonyan"
+label_settings = SubResource("LabelSettings_xucoo")
+
+[node name="WarningLabel" type="Label" parent="CanvasLayer" unique_id=1057037477]
+unique_name_in_owner = true
+anchors_preset = -1
+anchor_left = 0.522
+anchor_top = 0.388
+anchor_right = 0.522
+anchor_bottom = 0.388
+offset_left = -96.24005
+offset_top = -11.040009
+offset_right = 95.75995
+offset_bottom = 11.959991
+theme_override_colors/font_color = Color(0.83093804, 0.43982497, 0, 1)
+theme_override_fonts/font = ExtResource("5_v0s1l")
+text = "COMING SOON!"
+label_settings = SubResource("LabelSettings_v0s1l")
+
+[node name="Cloud" parent="." unique_id=1481232338 instance=ExtResource("9_lwhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.212215, 12.144305, 62.510597)
+
+[node name="Cloud2" parent="." unique_id=317285712 instance=ExtResource("9_lwhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.041137, 16.902802, 52.15938)
+
+[node name="Cloud3" parent="." unique_id=1375019190 instance=ExtResource("9_lwhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.474321, 14.186982, 54.620712)
+
+[node name="Cloud4" parent="." unique_id=1169135156 instance=ExtResource("9_lwhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0153196, 30.179058, 36.15348)
+
+[node name="Cloud5" parent="." unique_id=650510887 instance=ExtResource("9_lwhxt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.212883, 19.476765, 51.09514)
+
+[node name="Sketchfab_Scene" parent="." unique_id=657846896 instance=ExtResource("6_n4eug")]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 9.474011, 0.20860064, 75.90046)
+script = null
+
+[node name="Hills5" parent="." unique_id=336096671 instance=ExtResource("2_xucoo")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 18.118631, 0, 43.659973)
+
+[node name="Hills6" parent="." unique_id=1184719135 instance=ExtResource("2_xucoo")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 21.522627, 0, 45.840034)
+
+[node name="Hills7" parent="." unique_id=417160787 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 6.6313887, 0.16923642, 61.4832)
+
+[node name="Pipe" parent="." unique_id=1073539179 instance=ExtResource("7_dlksc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8400846, 1.2309844, 73.44481)
+
+[node name="Pipe2" parent="." unique_id=2052224177 instance=ExtResource("7_dlksc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2860785, -0.12241578, 73.31847)
+
+[node name="Pipe3" parent="." unique_id=552079812 instance=ExtResource("7_dlksc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.618844, -0.008733511, 60.38099)
+
+[node name="Pipe4" parent="." unique_id=740130570 instance=ExtResource("7_dlksc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.176385, 0.9276006, 60.254646)
+
+[node name="Hills8" parent="." unique_id=1582986083 instance=ExtResource("2_xucoo")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -30.093456, 0, 57.15106)
+
+[node name="Hills9" parent="." unique_id=1167097363 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 2.5788622, 0.16923642, 60.429855)
+
+[node name="Hills10" parent="." unique_id=644464455 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -18.84768, 0.16923642, 60.429855)
+
+[node name="Hills11" parent="." unique_id=1560322147 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -16.93964, 0.16923642, 52.719814)
+
+[node name="Hills12" parent="." unique_id=1504261257 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3.2220316, 0.16923642, 54.779037)
+
+[node name="StaticBody3D" parent="." unique_id=1878517231 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.276677, 3.0922017, 73.490074)
+
+[node name="StaticBody3D2" parent="." unique_id=1930459617 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.330264, 3.0922017, 73.490074)
+
+[node name="StaticBody3D3" parent="." unique_id=1979111223 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.276677, 3.0922017, 73.490074)
+
+[node name="StaticBody3D4" parent="." unique_id=180194831 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.495087, 4.5563273, 73.58528)
+
+[node name="StaticBody3D5" parent="." unique_id=993099729 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3329525, 3.098978, 73.42495)
+
+[node name="StaticBody3D6" parent="." unique_id=7136197 instance=ExtResource("8_5p1lm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.489286, 4.5586953, 73.58528)
+
+[node name="StaticBody3D7" parent="." unique_id=26270265 instance=ExtResource("9_1igrg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.330264, 3.0794897, 73.427185)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1576179051]
+transform = Transform3D(-4.3711393e-07, -10.000002, -4.371139e-07, 0, -4.3711395e-07, 10, -10.000001, 4.3711395e-07, 1.9106854e-14, -0.3397613, 6.54886, 75.64148)
+flip_faces = true
+size = Vector3(0.001, 0.55311584, 0.26701355)
+material = SubResource("StandardMaterial3D_v0s1l")
+
+[node name="StaticBody3D8" parent="." unique_id=318572586 instance=ExtResource("9_1igrg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.646537, 3.0794897, 70.691444)
+
+[node name="Hills13" parent="." unique_id=1976583581 instance=ExtResource("2_xucoo")]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 25.354836, 0, 61.853874)
+
+[node name="Hills14" parent="." unique_id=375765172 instance=ExtResource("3_ktlje")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 25.761595, 0.16923642, 62.854256)
+
+[node name="Pipe5" parent="." unique_id=1023475964 instance=ExtResource("7_dlksc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.579311, 1.2309844, 66.40146)
+
+[node name="AudioSelect" type="AudioStreamPlayer" parent="." unique_id=316818760]
+stream = ExtResource("12_5qkn8")
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1108148387]
+stream = ExtResource("13_xucoo")
+autoplay = true
+
+[node name="FadeLayer" type="CanvasLayer" parent="." unique_id=863550362]
+layer = 5
+
+[node name="MenuFade" type="ColorRect" parent="FadeLayer" unique_id=1332313629]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -34.0
+offset_right = 32.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

@@ -1,0 +1,332 @@
+[gd_scene format=3 uid="uid://c0ci4jps15bvr"]
+
+[ext_resource type="Texture2D" uid="uid://c6a6if18oueuf" path="res://Assets/Textures/tex_floor.png" id="1_43o5b"]
+[ext_resource type="PackedScene" uid="uid://bwj2kjkaqb777" path="res://Scenes/movement.tscn" id="2_7ktct"]
+[ext_resource type="PackedScene" uid="uid://dgudq81jgpwtn" path="res://Scenes/Mushroom.tscn" id="2_43o5b"]
+[ext_resource type="Script" uid="uid://b2dg648okafln" path="res://Scripts/CameraMovement.cs" id="2_uoqbt"]
+[ext_resource type="AudioStream" uid="uid://ncmul1lgkr37" path="res://Assets/Sounds/s_jump.mp3" id="3_v7yd6"]
+[ext_resource type="PackedScene" uid="uid://djedefuq32kqv" path="res://Scenes/pipe.tscn" id="4_3etub"]
+[ext_resource type="PackedScene" uid="uid://0x8h4llk516y" path="res://Scenes/Block.tscn" id="4_uks48"]
+[ext_resource type="PackedScene" uid="uid://vsvq0326monh" path="res://Scenes/cloud.tscn" id="5_whfra"]
+[ext_resource type="PackedScene" uid="uid://dgeyacgoa0a1q" path="res://Scenes/GapCutter.tscn" id="5_wly0c"]
+[ext_resource type="PackedScene" uid="uid://mg2euoaqonc" path="res://Scenes/hills.tscn" id="6_uue8y"]
+[ext_resource type="PackedScene" uid="uid://cmv2hno1veyvw" path="res://Scenes/StairBlock.tscn" id="6_xftef"]
+[ext_resource type="FontFile" uid="uid://brg3sbxpuu6i6" path="res://PressStart2P-Regular.ttf" id="7_aac4l"]
+[ext_resource type="PackedScene" uid="uid://c3rbnadjb6den" path="res://Scenes/Castle.tscn" id="7_bqrff"]
+[ext_resource type="PackedScene" uid="uid://djsgfkhhiqnci" path="res://Scenes/Flag.tscn" id="8_ju1fa"]
+[ext_resource type="PackedScene" uid="uid://dya5wxxah47lv" path="res://Scenes/Coin.tscn" id="8_ko8m6"]
+[ext_resource type="PackedScene" uid="uid://c2p0dsgikaifp" path="res://Scenes/Questionblock.tscn" id="9_vqk0m"]
+[ext_resource type="AudioStream" uid="uid://j8m5kk15n68q" path="res://Assets/Sounds/s_ground_theme.ogg" id="13_wly0c"]
+[ext_resource type="PackedScene" uid="uid://dbx0ajyhem6xh" path="res://Scenes/bush.tscn" id="14_fc1ei"]
+[ext_resource type="PackedScene" uid="uid://b1binubrr28o6" path="res://Scenes/toad.tscn" id="19_o7wth"]
+[ext_resource type="Texture2D" uid="uid://bgnueumydq1dy" path="res://Assets/Textures/tex_luigi.png" id="20_72mcj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_43o5b"]
+sky_top_color = Color(0.13819045, 0.19687203, 0.3432475, 1)
+sky_horizon_color = Color(0.9098039, 0.6039216, 0.42745098, 1)
+sky_curve = 0.075000055
+ground_horizon_color = Color(0.9098039, 0.6039216, 0.42745098, 1)
+ground_curve = 0.380549
+sun_angle_max = 11.13
+
+[sub_resource type="Sky" id="Sky_43o5b"]
+sky_material = SubResource("ProceduralSkyMaterial_43o5b")
+
+[sub_resource type="Environment" id="Environment_a1ds6"]
+background_mode = 2
+sky = SubResource("Sky_43o5b")
+ambient_light_source = 3
+ambient_light_color = Color(0.5803922, 0.7254902, 0.7921569, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 1.05
+ssao_enabled = true
+ssao_intensity = 2.91
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 0.62
+glow_bloom = 0.35
+glow_blend_mode = 0
+fog_enabled = true
+fog_light_color = Color(1, 0.83137256, 0.6392157, 1)
+fog_light_energy = 0.54
+fog_sun_scatter = 0.03
+fog_density = 0.005
+fog_aerial_perspective = 1.0
+fog_sky_affect = 0.092
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.34509805, 0.46666667, 0.6784314, 1)
+volumetric_fog_anisotropy = 0.26
+volumetric_fog_length = 59.0
+volumetric_fog_ambient_inject = 1.04
+volumetric_fog_sky_affect = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.015
+adjustment_saturation = 1.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7yd6"]
+albedo_texture = ExtResource("1_43o5b")
+metallic = 0.02
+metallic_specular = 0.14
+roughness = 0.79
+uv1_scale = Vector3(60, 500, 50)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o7wth"]
+radius = 0.65478516
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o7wth"]
+size = Vector3(0.001, 2.8685913, 1.3495483)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wly0c"]
+albedo_texture = ExtResource("1_43o5b")
+metallic = 0.02
+metallic_specular = 0.14
+roughness = 0.79
+uv1_scale = Vector3(60, 500, 50)
+
+[node name="MainWorld" type="Node3D" unique_id=1540494971]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=112018844]
+environment = SubResource("Environment_a1ds6")
+
+[node name="floor1" type="CSGBox3D" parent="." unique_id=232897793]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_v7yd6")
+
+[node name="Luigi" parent="floor1" unique_id=998525544 instance=ExtResource("19_o7wth")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, -9.551758, 25.69998, -5.03794)
+cast_shadow = 2
+gi_mode = 2
+pixel_size = 0.0008
+texture = ExtResource("20_72mcj")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="floor1/Luigi" unique_id=1588636529]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor1/Luigi/StaticBody3D2" unique_id=1017189592]
+shape = SubResource("CapsuleShape3D_o7wth")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="floor1/Luigi/StaticBody3D2" unique_id=142891089]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.720934, 0.59999657, 6.898034)
+shape = SubResource("BoxShape3D_o7wth")
+
+[node name="SpeechBubble" type="Label3D" parent="floor1" unique_id=1725731634]
+transform = Transform3D(0.58495766, 0, 0.8110638, 0, 1, 0, -0.8110638, 0, 0.58495766, -9.633341, 27.392555, -5.183736)
+pixel_size = 0.006
+billboard = 2
+alpha_cut = 1
+text = "It's just you and the horizon now. 
+The gate is heavy, and only the weight of gold can move it.
+ 25 coins, Mario. That’s the price of the gate. 
+Don't get lost in the sunset."
+font = ExtResource("7_aac4l")
+
+[node name="Sketchfab_Scene" parent="floor1" unique_id=657846896 instance=ExtResource("7_bqrff")]
+transform = Transform3D(-4.371139e-11, 0, 0.001, 0, 0.001, 0, -0.001, 0, -4.371139e-11, -8.996772, 24.994333, 1.1757123)
+script = null
+
+[node name="Pipe" parent="floor1" unique_id=1073539179 instance=ExtResource("4_3etub")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.969519, 25.546604, -3.690137)
+
+[node name="Pipe2" parent="floor1" unique_id=1127616016 instance=ExtResource("4_3etub")]
+transform = Transform3D(-4.152582e-08, 0.58, 0, -0.95, -2.5352605e-08, 0, 0, 0, 0.95, -11.334009, 25.559727, -3.6915379)
+
+[node name="floor2" type="CSGBox3D" parent="." unique_id=475972512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, -50)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor3" type="CSGBox3D" parent="." unique_id=56982341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.142885, -25, -1.4443469)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor4" type="CSGBox3D" parent="." unique_id=2014116901]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor5" type="CSGBox3D" parent="." unique_id=170761211]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor6" type="CSGBox3D" parent="." unique_id=1858480593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor7" type="CSGBox3D" parent="." unique_id=1432637488]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor8" type="CSGBox3D" parent="." unique_id=360104889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor9" type="CSGBox3D" parent="." unique_id=6995873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor10" type="CSGBox3D" parent="." unique_id=1093467545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="floor11" type="CSGBox3D" parent="." unique_id=1694242800]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+use_collision = true
+size = Vector3(400, 50, 50)
+material = SubResource("StandardMaterial3D_wly0c")
+
+[node name="Player" parent="." unique_id=193889849 instance=ExtResource("2_7ktct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1860104, 0.9897245, 6.6024275)
+WalkSpeed = 6.0
+RunSpeed = 9.0
+JumpVelocity = 8.0
+Acceleration = 0.05
+FallMultiplier = 2.2
+BobFreq = 2.5
+BobAmp = 0.05
+ControllerSensitivity = 4.0
+LookInertia = 40.0
+
+[node name="JumpSound" type="AudioStreamPlayer3D" parent="Player" unique_id=178212360]
+stream = ExtResource("3_v7yd6")
+volume_db = -34.947
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+attenuation_filter_db = 0.0
+
+[node name="WorldGenerator" type="Node3D" parent="." unique_id=1209725935 node_paths=PackedStringArray("PlayerNode", "FadeOverlay", "WorldLabel3D", "Floors") groups=["game_manager"]]
+script = ExtResource("2_uoqbt")
+PlayerNode = NodePath("../Player")
+GapCutterScene = ExtResource("5_wly0c")
+StairBlockScene = ExtResource("6_xftef")
+CastleScene = ExtResource("7_bqrff")
+FlagScene = ExtResource("8_ju1fa")
+ToadScene = ExtResource("19_o7wth")
+LuigiTexture = ExtResource("20_72mcj")
+FadeOverlay = NodePath("../FadeLayer/FadeOverlay")
+LuigiScale = 0.35
+TileLength = 50.0
+MushroomScene = ExtResource("2_43o5b")
+PipeScene = ExtResource("4_3etub")
+CloudScene = ExtResource("5_whfra")
+HillScene = ExtResource("6_uue8y")
+CoinScene = ExtResource("8_ko8m6")
+BushScene = ExtResource("14_fc1ei")
+BlockScene = ExtResource("4_uks48")
+QuestionBlockScene = ExtResource("9_vqk0m")
+BlockSize = 1.0
+BlockSpawnChance = 3.0
+BlockGroupInterval = 4.0
+PipeSpawnChance = 0.4
+PipeMinInterval = 1.5
+PipeMaxInterval = 4.0
+PipeMinHeight = 0.4
+PipeMaxHeight = 1.6
+WorldLabel3D = NodePath("../BackgroundHUD")
+Floors = [NodePath("../floor1"), NodePath("../floor2"), NodePath("../floor3"), NodePath("../floor4"), NodePath("../floor5"), NodePath("../floor6"), NodePath("../floor7"), NodePath("../floor8"), NodePath("../floor9"), NodePath("../floor10"), NodePath("../floor11")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1931841350]
+transform = Transform3D(1, 0, 0, 0, -0.9991944, 0.040131908, 0, -0.040131908, -0.9991944, 0, 0, 0)
+light_color = Color(1, 1, 0.78039217, 1)
+light_energy = 1.605
+light_volumetric_fog_energy = 0.664
+light_specular = 2.008
+shadow_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1915134820]
+visible = false
+
+[node name="UI_Container" type="Control" parent="HUD" unique_id=1394993903]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" type="Label" parent="HUD/UI_Container" unique_id=388709714]
+layout_mode = 1
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 90.0
+offset_bottom = 73.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_aac4l")
+text = "MARIO
+000000"
+
+[node name="WorldLabel" type="Label" parent="HUD/UI_Container" unique_id=555709972]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -526.0
+offset_top = 50.0
+offset_right = -486.0
+offset_bottom = 73.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_aac4l")
+text = "MARIO
+000000"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="HUD/UI_Container" unique_id=804544223]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1352.0
+offset_top = 50.0
+offset_right = -1312.0
+offset_bottom = 73.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("7_aac4l")
+text = "MARIO
+000000"
+
+[node name="BackgroundHUD" type="Label3D" parent="." unique_id=656116944]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -90.3864, 50.9104, -35.489746)
+text = "BACKGROUND"
+font = ExtResource("7_aac4l")
+font_size = 2000
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=160463765]
+stream = ExtResource("13_wly0c")
+volume_db = -0.085
+autoplay = true
+bus = &"Music"
+
+[node name="FadeLayer" type="CanvasLayer" parent="." unique_id=1965580590]
+
+[node name="FadeOverlay" type="ColorRect" parent="FadeLayer" unique_id=1212094181]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
