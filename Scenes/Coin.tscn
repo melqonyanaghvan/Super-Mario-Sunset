@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dya5wxxah47lv"]
+
+[ext_resource type="Texture2D" uid="uid://doqee64njdgph" path="res://Assets/Textures/tex_coin.png" id="1_h5dih"]
+[ext_resource type="Script" uid="uid://1dqs7wepdd4h" path="res://Scripts/Coin.cs" id="1_ou7jl"]
+[ext_resource type="AudioStream" uid="uid://cpt14avsg8ld1" path="res://Assets/Sounds/s_coin.ogg" id="3_ufda5"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ou7jl"]
+radius = 0.32669562
+
+[node name="Coin" type="Area3D" unique_id=1340627434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3615744, 0)
+collision_layer = 0
+script = ExtResource("1_ou7jl")
+RotationSpeed = 2.0
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=709412635]
+pixel_size = 0.001
+texture = ExtResource("1_h5dih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=184365774]
+shape = SubResource("SphereShape3D_ou7jl")
+
+[node name="CoinSound" type="AudioStreamPlayer3D" parent="." unique_id=376076621]
+stream = ExtResource("3_ufda5")
+volume_db = 9.302
+bus = &"SFX"

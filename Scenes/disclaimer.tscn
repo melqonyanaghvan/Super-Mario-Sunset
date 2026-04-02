@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://cps3yfcp82m4i"]
+
+[ext_resource type="Script" uid="uid://bm1l7u5oq7005" path="res://Scripts/Disclaimer.cs" id="1_l61dg"]
+[ext_resource type="FontFile" uid="uid://brg3sbxpuu6i6" path="res://PressStart2P-Regular.ttf" id="2_mtboa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_bn1hb"]
+line_spacing = 9.0
+paragraph_spacing = -1.0
+font = ExtResource("2_mtboa")
+font_size = 21
+outline_size = 4
+
+[node name="Disclaimer" type="Control" unique_id=57726812]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_l61dg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1565905476]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 26.875002
+anchor_bottom = 14.125001
+offset_right = -0.00012207031
+offset_bottom = -6.1035156e-05
+color = Color(0, 0, 0, 1)
+
+[node name="DisclaimerLabel" type="Label" parent="." unique_id=76622722]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 53.0
+offset_right = 967.0
+offset_bottom = 549.0
+text = "This demo is a personal tribute to the world of Mario.
+
+As a child, I saw this world differently through the static of an old TV: 
+endless, solitary, and bathed in a terminal sunset.
+
+This is a journey into those memories. 
+A walk through a world that was always meant to be lonely.
+
+
+
+Press any key to skip"
+label_settings = SubResource("LabelSettings_bn1hb")
+horizontal_alignment = 1
+autowrap_mode = 3

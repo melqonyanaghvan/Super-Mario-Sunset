@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cmv2hno1veyvw"]
+
+[ext_resource type="Texture2D" uid="uid://drr4ibaswm32x" path="res://Assets/Textures/tex_stair_block.png" id="1_qd542"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ab6iy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p2gdx"]
+albedo_texture = ExtResource("1_qd542")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i42b4"]
+
+[node name="StairBlock" type="StaticBody3D" unique_id=1878517231]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2129990019]
+shape = SubResource("BoxShape3D_ab6iy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=88045373]
+material_override = SubResource("StandardMaterial3D_p2gdx")
+mesh = SubResource("BoxMesh_i42b4")

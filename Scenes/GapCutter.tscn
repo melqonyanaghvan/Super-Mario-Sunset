@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dgeyacgoa0a1q"]
+
+[ext_resource type="Texture2D" uid="uid://c6a6if18oueuf" path="res://Assets/Textures/tex_floor.png" id="1_4fu1w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ta5ti"]
+shading_mode = 0
+albedo_color = Color(0.2819191, 0.28191918, 0.28191906, 1)
+albedo_texture = ExtResource("1_4fu1w")
+uv1_scale = Vector3(500, 70, 1)
+
+[node name="GapCutter" type="CSGBox3D" unique_id=736995597]
+operation = 2
+size = Vector3(400, 50, 4)
+material = SubResource("StandardMaterial3D_ta5ti")

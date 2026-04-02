@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bwj2kjkaqb777"]
+
+[ext_resource type="Script" uid="uid://deawuvklpw16a" path="res://Scripts/Player.cs" id="1_rqmv5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2bkep"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3cbam"]
+
+[sub_resource type="Gradient" id="Gradient_rqmv5"]
+offsets = PackedFloat32Array(0, 0.19927536, 0.8369565, 0.98188406)
+colors = PackedColorArray(1, 1, 1, 0, 0.9843137, 0.84313726, 0, 0.19607843, 0.9843137, 0.84313726, 0, 0.19607843, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2bkep"]
+gradient = SubResource("Gradient_rqmv5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3cbam"]
+emission_shape_offset = Vector3(0, 0, -10)
+emission_shape_scale = Vector3(20, 20, 20)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+initial_velocity_min = -0.099999994
+initial_velocity_max = 0.099999994
+gravity = Vector3(0, -0.01, 0)
+linear_accel_min = -0.050002236
+linear_accel_max = 0.04999776
+color_ramp = SubResource("GradientTexture1D_2bkep")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqmv5"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.83137256, 0.6392157, 1)
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_2bkep"]
+material = SubResource("StandardMaterial3D_rqmv5")
+size = Vector2(0.02, 0.02)
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=2029713956]
+script = ExtResource("1_rqmv5")
+JumpVelocity = 5.0
+ControllerSensitivity = 0.07
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1081524802]
+shape = SubResource("CapsuleShape3D_2bkep")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=718592493]
+mesh = SubResource("CapsuleMesh_3cbam")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=537099613]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.024025, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=1716760946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18011987, -0.47484124, -0.263754)
+
+[node name="DustParticles" type="GPUParticles3D" parent="CameraPivot" unique_id=25792512]
+amount = 500
+lifetime = 10.0
+preprocess = 9.0
+process_material = SubResource("ParticleProcessMaterial_3cbam")
+draw_pass_1 = SubResource("QuadMesh_2bkep")

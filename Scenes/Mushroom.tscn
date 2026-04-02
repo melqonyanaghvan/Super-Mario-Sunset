@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dgudq81jgpwtn"]
+
+[ext_resource type="Texture2D" uid="uid://bbfpk6gxq2wpq" path="res://Assets/Textures/tex_goomba_1.png" id="1_lnt1q"]
+[ext_resource type="Texture2D" uid="uid://b245d1xfpyqwy" path="res://Assets/Textures/tex_goomba_2.png" id="2_ll876"]
+[ext_resource type="Script" uid="uid://bbavo7l2vl67s" path="res://Scripts/Mushroom.cs" id="3_3d8vl"]
+[ext_resource type="Script" uid="uid://bxfaj764mbwak" path="res://Scripts/Area3d.cs" id="4_ll876"]
+[ext_resource type="Texture2D" uid="uid://c524sadsa4okh" path="res://Assets/Textures/tex_crushed_goomba.png" id="5_3d8vl"]
+[ext_resource type="AudioStream" uid="uid://babe70y3wyov8" path="res://Assets/Sounds/s_goomba-stomp.mp3" id="6_avi24"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uue8y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lnt1q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ll876")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ll876"]
+height = 0.67211914
+
+[node name="Sprite3D" type="AnimatedSprite3D" unique_id=719852540]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0.0005061455, 0, -0.0005061455, 0.9999999, 0, 0, 0)
+pixel_size = 0.0007
+billboard = 2
+alpha_cut = 1
+sprite_frames = SubResource("SpriteFrames_uue8y")
+animation = &"walk"
+autoplay = "walk"
+frame_progress = 0.18379149
+script = ExtResource("3_3d8vl")
+
+[node name="Hitbox" type="Area3D" parent="." unique_id=1087960661]
+collision_layer = 0
+script = ExtResource("4_ll876")
+CrushedTexture = ExtResource("5_3d8vl")
+
+[node name="DeathTimer" type="Timer" parent="Hitbox" unique_id=181658342]
+wait_time = 3.943
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" unique_id=1551915541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001342744, -2.012257e-11)
+shape = SubResource("CylinderShape3D_ll876")
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="Hitbox" unique_id=1208310343]
+stream = ExtResource("6_avi24")
+volume_db = 6.822
+max_distance = 10.0
+bus = &"SFX"

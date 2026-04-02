@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://0x8h4llk516y"]
+
+[ext_resource type="Texture2D" uid="uid://cqxgjffr0unia" path="res://Assets/Textures/tex_brick_1.png" id="1_2wby2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ab6iy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkki4"]
+albedo_texture = ExtResource("1_2wby2")
+metallic = 0.44
+metallic_specular = 0.29
+roughness = 0.68
+rim_enabled = true
+rim = 0.5
+uv1_scale = Vector3(3, 2, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i42b4"]
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1878517231]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2129990019]
+shape = SubResource("BoxShape3D_ab6iy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=88045373]
+material_override = SubResource("StandardMaterial3D_rkki4")
+mesh = SubResource("BoxMesh_i42b4")

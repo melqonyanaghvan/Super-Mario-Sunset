@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://c2p0dsgikaifp"]
+
+[ext_resource type="Script" uid="uid://cut6q4yp85lia" path="res://Scripts/QuestionBlock.cs" id="1_pb5y0"]
+[ext_resource type="Texture2D" uid="uid://d2d5l0nac10ei" path="res://Assets/Textures/tex_question_block_1.png" id="2_tey81"]
+[ext_resource type="Texture2D" uid="uid://bcko1vt5d8dwn" path="res://Assets/Textures/tex_question_block_2.png" id="3_yofcu"]
+[ext_resource type="Texture2D" uid="uid://c4yjp14fn0k5n" path="res://Assets/Textures/tex_question_block_3.png" id="4_jh8ab"]
+[ext_resource type="Texture2D" uid="uid://de13wr0w822c8" path="res://Assets/Textures/tex_question_block_4.png" id="5_mc8rr"]
+[ext_resource type="Texture2D" uid="uid://lt6v4jalgnw7" path="res://Assets/Textures/tex_question_block_5.png" id="6_gh7kf"]
+[ext_resource type="Texture2D" uid="uid://bdvy1vww3x1ix" path="res://Assets/Textures/tex_question_block_6.png" id="7_khmlm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ab6iy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i42b4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_avbsi"]
+metallic = 1.0
+metallic_specular = 1.0
+uv1_scale = Vector3(3, 2, 1)
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1878517231]
+script = ExtResource("1_pb5y0")
+AnimationFrames = Array[Texture2D]([ExtResource("2_tey81"), ExtResource("3_yofcu"), ExtResource("4_jh8ab"), ExtResource("5_mc8rr"), ExtResource("6_gh7kf"), ExtResource("7_khmlm")])
+AnimationSpeed = 0.12
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2129990019]
+shape = SubResource("BoxShape3D_ab6iy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=88045373]
+mesh = SubResource("BoxMesh_i42b4")
+surface_material_override/0 = SubResource("StandardMaterial3D_avbsi")
