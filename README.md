@@ -43,7 +43,7 @@ To explore the source code:
 
 ---
 
-### Developed by **Aghvan Melkonyan**
+### Developed by **Aghvan Melqonyan**
 
 ---
 *Disclaimer: This is a non-commercial fan project. All rights to the Super Mario IP belong to Nintendo. This project is created for educational and artistic purposes only.*
