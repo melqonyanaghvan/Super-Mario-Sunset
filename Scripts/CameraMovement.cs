@@ -7,14 +7,14 @@ public partial class CameraMovement : Node3D
 	[Export] public CharacterBody3D PlayerNode; 
 	[Export] public PackedScene GapCutterScene; 
 	[Export] public PackedScene StairBlockScene; 
-	[Export] public PackedScene CastleScene; // Сюда перетащи замок в инспекторе!
-	[Export] public PackedScene FlagScene; // Сюда перетащи модель из интернета
+	[Export] public PackedScene CastleScene; 
+	[Export] public PackedScene FlagScene;
 	[ExportGroup("Финальные настройки")]
-	[Export] public PackedScene ToadScene;   // Сцена Тоада
-	[Export] public Texture2D LuigiTexture; // Текстура Луиджи
+	[Export] public PackedScene ToadScene;  
+	[Export] public Texture2D LuigiTexture; 
 	[Export] public ColorRect FadeOverlay;
-	private Node3D _spawnedLuigi; // Ссылка на самого Луиджи
-	private Label3D _luigiLabel; // Ссылка на надпись над ним
+	private Node3D _spawnedLuigi; 
+	private Label3D _luigiLabel;
 	[Export] public float LuigiScale = 0.5f;
 
 	private bool _isLuigiSpawned = false;
@@ -56,11 +56,10 @@ public partial class CameraMovement : Node3D
 	[ExportGroup("Полы")]
 	[Export] public Node3D[] Floors;
 
-	// ПЕРЕМЕННЫЕ ДЛЯ ЗОН (ЗОЛОТАЯ И ФИНАЛЬНАЯ)
 	private bool _isGoldenZone = false;
 	private bool _goldenZoneSpawned = false; 
-	private bool _isFinalZone = false;    // Исправляет ошибку
-	private bool _castleSpawned = false;  // Исправляет ошибку
+	private bool _isFinalZone = false;   
+	private bool _castleSpawned = false;  
 	
 	private List<Node3D> _activeFloors = new List<Node3D>();
 	private float _farthestZ = 0f;
@@ -76,9 +75,9 @@ public partial class CameraMovement : Node3D
 	{
 		if (FadeOverlay != null)
 		{
-			FadeOverlay.Modulate = new Color(1, 1, 1, 1); // Начинаем с черного
+			FadeOverlay.Modulate = new Color(1, 1, 1, 1);
 			Tween fadeIn = CreateTween();
-			fadeIn.TweenProperty(FadeOverlay, "modulate:a", 0.0f, 1.0f); // Медленно проявляем мир
+			fadeIn.TweenProperty(FadeOverlay, "modulate:a", 0.0f, 1.0f); 
 		}
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		if (Floors != null)
@@ -128,31 +127,28 @@ public partial class CameraMovement : Node3D
 		int currentDistance = (int)Mathf.Abs(PlayerNode.GlobalPosition.Z);
 		if (currentDistance > _score) _score = currentDistance;
 		
-		// ЛОГИКА АКТИВАЦИИ ЗОН
+		
 		if (_score >= 2000 && !_goldenZoneSpawned)
 		{
 			_isGoldenZone = true;
 		}
 
-		// Внутри _Process
+		
 		if (_coins >= 25 && !_isLuigiSpawned)
 		{
 			_isLuigiSpawned = true;
-			SpawnLuigiDirectly(); // Этот метод мы создадим ниже
+			SpawnLuigiDirectly(); 
 		}
 	if (_isLuigiSpawned && _spawnedLuigi != null && _luigiLabel != null)
 	{
 		float distance = PlayerNode.GlobalPosition.DistanceTo(_spawnedLuigi.GlobalPosition);
 
-		// Если подошли ближе 15 метров И текст еще прозрачный
 		if (distance < 15.0f && _luigiLabel.Modulate.A < 0.1f)
 		{
 			Tween tween = GetTree().CreateTween();
-			// Parallel() заставляет обе анимации идти одновременно
 			tween.Parallel().TweenProperty(_luigiLabel, "modulate:a", 1.0f, 1.5f);
 			tween.Parallel().TweenProperty(_luigiLabel, "outline_modulate:a", 1.0f, 1.5f);
 		}
-		// Если отошли дальше 20 метров И текст еще видимый
 		else if (distance > 20.0f && _luigiLabel.Modulate.A > 0.9f)
 		{
 			Tween tween = GetTree().CreateTween();
@@ -168,19 +164,17 @@ private void SpawnLuigiDirectly()
 {
 	if (ToadScene == null || LuigiTexture == null) return;
 
-	// 1. ПАРАМЕТРЫ ПОИСКА
+	
 	float startZ = PlayerNode.GlobalPosition.Z - 100f; 
 	float safeZ = startZ;
-	float finalY = 0.7f; // Высота по умолчанию (если луч ничего не найдет)
+	float finalY = 0.7f; 
 	bool foundSafeSpot = false;
 
-	// 2. ЦИКЛ ПОИСКА БЕЗОПАСНОГО МЕСТА (RayCast)
-	// Проверяем 10 точек вперед, чтобы не упасть в пропасть
 	for (int i = 0; i < 10; i++)
 	{
 		float checkZ = startZ - (i * 2.0f);
-		Vector3 rayStart = new Vector3(-9.0f, 20.0f, checkZ); // Стреляем с высоты 20м
-		Vector3 rayEnd = new Vector3(-9.0f, -40.0f, checkZ);  // Вниз до -40м
+		Vector3 rayStart = new Vector3(-9.0f, 20.0f, checkZ); 
+		Vector3 rayEnd = new Vector3(-9.0f, -40.0f, checkZ); 
 
 		var spaceState = GetWorld3D().DirectSpaceState;
 		var query = PhysicsRayQueryParameters3D.Create(rayStart, rayEnd);
@@ -190,12 +184,10 @@ private void SpawnLuigiDirectly()
 		{
 			Vector3 hitPos = (Vector3)result["position"];
 			
-			// Если поверхность на уровне земли (не слишком высоко и не слишком низко)
+			
 			if (hitPos.Y < 2.0f && hitPos.Y > -26.0f) 
 			{
 				safeZ = checkZ;
-				// ФИКС ВЫСОТЫ: берем точку удара луча и добавляем 1.1 метра, 
-				// чтобы спрайт (scale 0.5) стоял ногами на полу
 				finalY = hitPos.Y + 0.7f; 
 				foundSafeSpot = true;
 				break; 
@@ -203,17 +195,14 @@ private void SpawnLuigiDirectly()
 		}
 	}
 
-	// 3. СОЗДАНИЕ ОБЪЕКТА
 	var luigi = ToadScene.Instantiate<Node3D>();
 	GetTree().Root.AddChild(luigi);
 	_spawnedLuigi = luigi;
 
-	// Применяем найденные координаты и масштаб
 	luigi.GlobalPosition = new Vector3(-15.0f, finalY, safeZ);
 	luigi.RotationDegrees = new Vector3(0, 180, 0);
 	luigi.Scale = Vector3.One * LuigiScale;
 
-	// 4. ТЕКСТУРА
 	Sprite3D sprite = luigi as Sprite3D ?? luigi.FindChild("*", true, false) as Sprite3D;
 	if (sprite != null) 
 	{
@@ -222,7 +211,6 @@ private void SpawnLuigiDirectly()
 		sprite.AlphaCut = Sprite3D.AlphaCutMode.Discard;
 		sprite.RenderPriority = 10;
 	}
-	// 5. НАДПИСЬ (С исправлением Billboard и зеркальности)
 
 	_luigiLabel = new Label3D();
 	luigi.AddChild(_luigiLabel);
@@ -243,12 +231,9 @@ private void SpawnLuigiDirectly()
 	_luigiLabel.Modulate = new Color(1, 1, 1, 0);
 	_luigiLabel.OutlineModulate = new Color(0, 0, 0, 0);
 	
-	// ПРАВИЛЬНЫЙ Billboard (через класс BaseMaterial3D)
 	_luigiLabel.Billboard = BaseMaterial3D.BillboardModeEnum.Enabled;
 	_luigiLabel.DoubleSided = false;
 	
-	// Если текст всё еще отзеркален - включи FlipH (убери //)
-	// _luigiLabel.FlipH = true; 
 
 	_isFinalZone = true;
 	
@@ -264,7 +249,6 @@ private void SpawnLuigiDirectly()
 	{
 		if (WorldLabel3D == null) return;
 		
-		// Складываем текущую дистанцию и очки за убийства
 		int totalScore = _score + _killScore; 
 		
 		string scoreStr = totalScore.ToString("D6");
@@ -295,7 +279,6 @@ private void SpawnLuigiDirectly()
 	private void SpawnObjects(Node3D floor)
 	{
 		bool isStartZone = floor.GlobalPosition.Z > -50.0f && floor.GlobalPosition.Z <= 5.0f;
-		// ПРИОРЕТЕТ 1: ФИНАЛЬНЫЙ ЗАМОК (100 МОНЕТ)
 		if (_isFinalZone)
 			{
 				SpawnCastleScene(floor);
@@ -304,8 +287,6 @@ private void SpawnLuigiDirectly()
 				return; 
 			}
 
-	
-		// ПРИОРЕТЕТ 2: ЗОЛОТАЯ ЗОНА (1000 ОЧКОВ)
 		if (_isGoldenZone)
 		{
 			SpawnGoldenContent(floor);
@@ -316,7 +297,6 @@ private void SpawnLuigiDirectly()
 
 		List<float> gapZones = new List<float>();
 
-		// --- ГЕНЕРАЦИЯ ОБРЫВОВ ---
 		if (GapCutterScene != null && !isStartZone)
 		{
 			for (int i = 0; i < 4; i++) 
@@ -348,7 +328,6 @@ private void SpawnLuigiDirectly()
 			return false;
 		}
 
-		// --- ГЕНЕРАЦИЯ ПИРАМИД ---
 		if (StairBlockScene != null && gapZones.Count > 0)
 		{
 			gapZones.Sort();
@@ -385,7 +364,6 @@ private void SpawnLuigiDirectly()
 			}
 		}
 
-		// --- БЛОКИ И МОНЕТКИ ---
 		if (BlockScene != null)
 		{
 			float bZ = -(TileLength / 2) + 10;
@@ -425,7 +403,6 @@ private void SpawnLuigiDirectly()
 			}
 		}
 
-		// --- ТРУБЫ И ВРАГИ ---
 		float zPos = -(TileLength / 2) + 5;
 		while (zPos < (TileLength / 2) - 10)
 		{
@@ -488,7 +465,6 @@ private void SpawnLuigiDirectly()
 
 private void SpawnCastleScene(Node3D floor)
 {
-	// --- 1. ЛЕСТНИЦА (ПИРАМИДА) ---
 	float stairsStartZ = 40.0f; 
 	int stairSteps = 8; 
 
@@ -505,7 +481,6 @@ private void SpawnCastleScene(Node3D floor)
 					floor.AddChild(block);
 					float finalX = x * BlockSize;
 					float finalY = (h * BlockSize) + (BlockSize / 2.0f) + _offsetY;
-					// Блоки уходят "вглубь" (минус по Z)
 					float finalZ = stairsStartZ - (s * BlockSize) - (h * BlockSize);
 					block.Position = new Vector3(finalX, finalY, finalZ);
 				}
@@ -513,28 +488,24 @@ private void SpawnCastleScene(Node3D floor)
 		}
 	}
 
-	// --- 2. ФЛАГШТОК ---
-	float flagZ = 0; // Переменная для хранения Z флага, чтобы привязать к ней замок
+	
+	float flagZ = 0; 
 	if (FlagScene != null)
 	{
 		var flag = FlagScene.Instantiate<Node3D>();
 		floor.AddChild(flag);
 		
-		float flagCorrectionX = -147f; // Твоя коррекция для кривой модели
+		float flagCorrectionX = -147f; 
 		flagZ = stairsStartZ - (stairSteps * BlockSize) - 10.0f;
 		
-		// Опускаем на землю (offsetY - 1 метр)
 		flag.Position = new Vector3(flagCorrectionX, _offsetY - 1.0f, flagZ);
 	}
 
-	// --- 3. ЗАМОК (СТАВИМ БЛИЖЕ) ---
 	if (CastleScene != null)
 	{
 		var castle = CastleScene.Instantiate<Node3D>();
 		floor.AddChild(castle);
 		
-		// Ставим замок всего в 12 метрах за флагом (раньше было -40 или -15)
-		// Если он все еще кажется далеким, поставь -5.0f вместо -12.0f
 		float castleZ = flagZ -8.0f; 
 
 		castle.Position = new Vector3(-5.0f, _offsetY-0.01f, castleZ); 
@@ -544,14 +515,12 @@ private void SpawnCastleScene(Node3D floor)
 
 	private void SpawnDecorations(Node3D floor)
 	{
-		// --- ГОРЫ (Дальний план) ---
 		if (HillScene != null)
 		{
 			for (int i = 0; i < random.Next(2, 4); i++)
 			{
 				var hill = (Node3D)HillScene.Instantiate();
 				floor.AddChild(hill);
-				// Горы стоят далеко (от 30 до 60 метров от центра)
 				float xHill = (float)(random.NextDouble() * 30 + 30) * ((random.NextDouble() > 0.5) ? 1 : -1);
 				hill.Position = new Vector3(xHill, -0.5f + _offsetY, (float)(random.NextDouble() * TileLength - (TileLength / 2)));
 				float scale = (float)(random.NextDouble() * 3 + 4.0);
@@ -559,28 +528,26 @@ private void SpawnCastleScene(Node3D floor)
 			}
 		}
 
-		// --- КУСТЫ (Ближний план) ---
 		if (BushScene != null)
 		{
-			// Спавним от 3 до 6 кустов на одну плиту
 			for (int i = 0; i < random.Next(3, 7); i++)
 			{
 				var bush = (Node3D)BushScene.Instantiate();
 				floor.AddChild(bush);
 				
-				// Кусты стоят ближе к дороге (от 12 до 25 метров от центра)
+				
 				float xBush = (float)(random.NextDouble() * 13 + 12) * ((random.NextDouble() > 0.5) ? 1 : -1);
 				float zBush = (float)(random.NextDouble() * TileLength - (TileLength / 2));
 				
 				bush.Position = new Vector3(xBush, 0.0f + _offsetY, zBush);
 				
-				// Немного случайного масштаба, чтобы кусты не были одинаковыми
+				
 				float scale = (float)(random.NextDouble() * 0.8 + 1.2); 
 				bush.Scale = Vector3.One * scale;
 			}
 		}
 
-		// --- ОБЛАКА ---
+		
 		if (CloudScene != null)
 		{
 			for (int i = 0; i < 6; i++)
@@ -598,7 +565,7 @@ private void SpawnCastleScene(Node3D floor)
 	
 		public override void _Input(InputEvent @event)
 	{
-		// Проверяем, нажата ли наша кнопка "exit_to_menu"
+		
 		if (@event.IsActionPressed("exit_to_menu"))
 		{
 			ReturnToMenu();
@@ -609,31 +576,23 @@ private void SpawnCastleScene(Node3D floor)
 	{
 		if (FadeOverlay == null)
 		{
-			// Если забыл привязать узел, просто выходим без эффекта
 			ChangeSceneToMenu();
 			return;
 		}
 
-		// 1. Создаем Tween для плавности
 		Tween fadeTween = CreateTween();
-		
-		// 2. Анимируем прозрачность (Modulate:Alpha) от 0 до 1 за 0.5 секунды
 		fadeTween.TweenProperty(FadeOverlay, "modulate:a", 1.0f, 0.5f);
-		
-		// 3. Ждем, пока анимация закончится
+
 		await ToSignal(fadeTween, "finished");
 
-		// 4. Теперь меняем сцену
 		ChangeSceneToMenu();
 	}
 
 	private void ChangeSceneToMenu()
 	{
-		// Обязательно возвращаем время в норму (если была пауза)
 		Engine.TimeScale = 1.0f;
 		
-		// Проверь путь! На прошлом скриншоте была ошибка 'res://Scenes/Menu.tscn'
-		// Напиши здесь ТОЧНЫЙ путь, который ты скопировал из FileSystem
+		
 		string menuPath = "res://Menu.tscn"; 
 		
 		GetTree().CallDeferred(SceneTree.MethodName.ChangeSceneToFile, menuPath);
