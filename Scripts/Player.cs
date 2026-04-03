@@ -17,8 +17,8 @@ public partial class Player : CharacterBody3D
 	[ExportGroup("Head Bob")]
 	[Export] public float BobFreq = 5.0f;    
 	[Export] public float BobAmp = 0.08f;   
-	[Export] public float ControllerSensitivity = 3.0f; // Чувствительность стика
-	[Export] public float LookInertia = 10.0f; // Чем выше число, тем меньше инерция (быстрее реакция)
+	[Export] public float ControllerSensitivity = 3.0f;
+	[Export] public float LookInertia = 10.0f; 
 	private Vector2 _smoothLookDir = Vector2.Zero;
 	
 	private float _bobTimer = 0.0f;         
@@ -36,20 +36,14 @@ public partial class Player : CharacterBody3D
 		_defaultY = _pivot.Position.Y;
 	}
 
-	// ОБРАБОТКА КАМЕРЫ В _Process ДЛЯ ПЛАВНОСТИ (High FPS)
 		public override void _Process(double delta)
 		{
 			float fDelta = (float)delta;
 
-			// 1. ПОЛУЧАЕМ "СЫРЫЕ" ДАННЫЕ СО СТИКА
 			Vector2 rawLookDir = Input.GetVector("look_left", "look_right", "look_up", "look_down");
-
-			// 2. ПРИМЕНЯЕМ ИНЕРЦИЮ (LERP)
-			// Мы плавно ведем _smoothLookDir к rawLookDir
 			_smoothLookDir = _smoothLookDir.Lerp(rawLookDir, fDelta * LookInertia);
 
-			// 3. ВРАЩАЕМ, ИСПОЛЬЗУЯ СГЛАЖЕННОЕ ЗНАЧЕНИЕ
-			if (_smoothLookDir.Length() > 0.001f) // Проверка на микро-движения
+			if (_smoothLookDir.Length() > 0.001f) 
 			{
 				float speedMultiplier = 2.5f; 
 
@@ -69,7 +63,6 @@ public partial class Player : CharacterBody3D
 		Vector3 velocity = Velocity;
 		float fDelta = (float)delta;
 
-		// ГРАВИТАЦИЯ
 		if (!IsOnFloor()) 
 		{
 			if (velocity.Y < 0) velocity.Y -= _gravity * FallMultiplier * fDelta;
@@ -77,14 +70,12 @@ public partial class Player : CharacterBody3D
 			else velocity.Y -= _gravity * fDelta;
 		}
 
-		// ПРЫЖОК
 		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor()) 
 		{
 			velocity.Y = JumpVelocity;
 			_jumpSound.Play();
 		}
 
-		// ДВИЖЕНИЕ
 		bool isRunning = Input.IsActionPressed("ui_shift"); 
 		float currentMaxSpeed = isRunning ? RunSpeed : WalkSpeed;
 
