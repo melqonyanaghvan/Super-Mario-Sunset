@@ -13,12 +13,9 @@ public partial class QuestionBlock : StaticBody3D
 
 public override void _Ready()
 {
-	// 1. Ищем меш ВНУТРИ блока по его точному имени. 
-	// Если твой куб в сцене называется "MeshInstance3D", оставляем так. 
-	// Если он называется "Cube" или "Box", замени имя в кавычках!
+
 	_mesh = GetNodeOrNull<MeshInstance3D>("MeshInstance3D");
 
-	// Если не нашел по имени, попробуем найти любого ребенка, который является мешем
 	if (_mesh == null)
 	{
 		foreach (var child in GetChildren())
@@ -33,14 +30,11 @@ public override void _Ready()
 
 	if (_mesh != null)
 	{
-		;
-		
-		// 2. Берем материал из меша
 		var mat = _mesh.GetActiveMaterial(0) as StandardMaterial3D;
 		
 		if (mat != null)
 		{
-			// Делаем копию, чтобы анимировался только ЭТОТ блок
+
 			_material = (StandardMaterial3D)mat.Duplicate();
 			_mesh.SetSurfaceOverrideMaterial(0, _material);
 			
@@ -58,13 +52,9 @@ public override void _Ready()
 			_timer = 0f;
 			_currentFrame = (_currentFrame + 1) % AnimationFrames.Length;
 			
-			// 1. Меняем текстуру в нашем объекте материала
 			_material.AlbedoTexture = AnimationFrames[_currentFrame];
-			
-			// 2. ВОТ ЭТО ДОБАВЬ ОБЯЗАТЕЛЬНО:
-			// Мы заново назначаем наш измененный материал в слот меша
+
 			_mesh.SetSurfaceOverrideMaterial(0, _material); 
-			
 			
 		}
 	}
